@@ -9,7 +9,7 @@ import java.util.List;
 
 @Service
 public class GameServiceImpl implements GameService{
-    private GameRepository gameRepository;
+    private final GameRepository gameRepository;
     public GameServiceImpl(GameRepository gameRepository) {
         this.gameRepository = gameRepository;
     }
