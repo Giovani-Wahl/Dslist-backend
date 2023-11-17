@@ -13,8 +13,8 @@ import java.util.List;
 
 @Service
 public class GameServiceImpl implements GameService{
-    @Autowired
     private final GameRepository gameRepository;
+    @Autowired
     public GameServiceImpl(GameRepository gameRepository) {
         this.gameRepository = gameRepository;
     }
