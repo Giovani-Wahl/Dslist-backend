@@ -1,6 +1,7 @@
 package com.giovaniwahl.dslist.domain.dtos;
 
 import com.giovaniwahl.dslist.domain.entities.Game;
+import com.giovaniwahl.dslist.projections.GameMinProjection;
 
 public class GameShortDto {
     private Long id;
@@ -16,6 +17,13 @@ public class GameShortDto {
         year = entity.getYear();
         imgUrl = entity.getImgUrl();
         shortDescription = entity.getShortDescription();
+    }
+    public GameShortDto(GameMinProjection projection) {
+        id = projection.getId();
+        title = projection.getTitle();
+        year = projection.getYear();
+        imgUrl = projection.getImgUrl();
+        shortDescription = projection.getShortDescription();
     }
 
     public Long getId() {

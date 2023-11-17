@@ -1,4 +1,4 @@
-package com.giovaniwahl.dslist.domain.services.game;
+package com.giovaniwahl.dslist.domain.services.list;
 
 import com.giovaniwahl.dslist.domain.dtos.GameListDto;
 import org.springframework.transaction.annotation.Transactional;
