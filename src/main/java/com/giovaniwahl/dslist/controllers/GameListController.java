@@ -23,13 +23,11 @@ public class GameListController {
 
     @GetMapping
     public List<GameListDto> findAll(){
-        List<GameListDto> result = gameListService.findAll();
-        return result;
+        return gameListService.findAll();
     }
     @GetMapping("/{ListId}/games")
     public List<GameShortDto> findByList(@PathVariable Long ListId){
-        List<GameShortDto> result = gameService.findByList(ListId);
-        return result;
+        return gameService.findByList(ListId);
     }
     @PostMapping("/{listId}/replacement")
     public void move(@PathVariable Long listId, @RequestBody ReplacementDto body){

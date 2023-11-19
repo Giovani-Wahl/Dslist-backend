@@ -29,16 +29,11 @@ public class GameListServiceImpl implements GameListService {
 
     @Override
     public void move(Long listId, int sourceIndex, int destinationIndex) {
-        /* Gera a lista ordenada*/
         List<GameMinProjection> listGames = gameRepository.searchByList(listId);
-        /* Remove o item desejado da lista*/
         GameMinProjection objAltered = listGames.remove(sourceIndex);
-        /*Inclui o item desejado novamente na lista na posição desejada*/
         listGames.add(destinationIndex,objAltered);
-        /*Encontrar o minimo e o maximo entre o item alterado e sua nova posição*/
-        int min = sourceIndex < destinationIndex ? sourceIndex : destinationIndex;
-        int max = sourceIndex < destinationIndex ? destinationIndex :sourceIndex;
-        /* atualizar as posições na lista conforme min e max encontrados */
+        int min = Math.min(sourceIndex, destinationIndex);
+        int max = Math.max(sourceIndex, destinationIndex);
         for (int i = min; i < max; i++){
             gameListRepository.updateBelongingPosition(listId,listGames.get(i).getId(),i);
         }

@@ -23,22 +23,20 @@ public class GameServiceImpl implements GameService{
     @Transactional(readOnly = true)
     public List<GameShortDto> findAll() {
         List<Game> result = gameRepository.findAll();
-        List<GameShortDto> gameShortDtoList = result.stream().map(GameShortDto::new).toList();
-        return gameShortDtoList;
+        return result.stream().map(GameShortDto::new).toList();
     }
 
     @Override
     @Transactional(readOnly = true)
     public GameDto findById(Long id) {
         Game result = gameRepository.findById(id).get();
-        GameDto gameDto = new GameDto(result);
-        return gameDto;
+        return new GameDto(result);
     }
 
     @Override
     @Transactional(readOnly = true)
     public List<GameShortDto> findByList(Long ListId) {
         List<GameMinProjection> result = gameRepository.searchByList(ListId);
-        return result.stream().map(x -> new GameShortDto(x)).toList();
+        return result.stream().map(GameShortDto::new).toList();
     }
 }

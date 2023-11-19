@@ -10,7 +10,6 @@ public class ReplacementDto {
     public void setSourceIndex(Integer sourceIndex) {
         this.sourceIndex = sourceIndex;
     }
-
     public Integer getDestinationIndex() {
         return destinationIndex;
     }
