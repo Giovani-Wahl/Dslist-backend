@@ -8,4 +8,6 @@ import java.util.List;
 public interface GameListService {
     @Transactional(readOnly = true)
     List<GameListDto> findAll();
+    @Transactional
+    void move(Long listId, int sourceIndex, int destinationIndex);
 }
