@@ -27,9 +27,9 @@ public class GameServiceImpl implements GameService{
 
     @Override
     @Transactional(readOnly = true)
-    public List<GameShortDto> findAll() {
-        List<Game> result = gameRepository.findAll();
-        return result.stream().map(GameShortDto::new).toList();
+    public Page<GameShortDto> findAll(Pageable pageable) {
+        Page<Game> games = gameRepository.findAll(pageable);
+        return games.map(GameShortDto::new);
     }
 
     @Override

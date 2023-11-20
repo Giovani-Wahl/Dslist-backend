@@ -28,8 +28,9 @@ public class GameController {
     }
 
     @GetMapping
-    public ResponseEntity<List<GameShortDto>> findAll(){
-        return ResponseEntity.status(HttpStatus.OK).body(gameService.findAll());
+    public ResponseEntity<Page<GameShortDto>> findAll(@PageableDefault(page = 0, size = 5, sort = "id",
+            direction = Sort.Direction.ASC) Pageable pageable){
+        return ResponseEntity.status(HttpStatus.OK).body(gameService.findAll(pageable));
     }
 
     @GetMapping("/{id}")

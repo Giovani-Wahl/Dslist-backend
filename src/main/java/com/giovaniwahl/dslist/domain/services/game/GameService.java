@@ -9,7 +9,7 @@ import java.util.List;
 import java.util.Optional;
 
 public interface GameService {
-    List<GameShortDto> findAll();
+    Page<GameShortDto> findAll(Pageable pageable);
     Optional<GameDto> findById(Long id);
     List<GameShortDto> findByList(Long ListId);
 }
