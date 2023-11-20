@@ -5,11 +5,17 @@ import com.giovaniwahl.dslist.domain.dtos.GameShortDto;
 import com.giovaniwahl.dslist.domain.entities.Game;
 import com.giovaniwahl.dslist.domain.repositories.GameRepository;
 import com.giovaniwahl.dslist.projections.GameMinProjection;
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageImpl;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
+import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Service
 public class GameServiceImpl implements GameService{
@@ -28,9 +34,9 @@ public class GameServiceImpl implements GameService{
 
     @Override
     @Transactional(readOnly = true)
-    public GameDto findById(Long id) {
-        Game result = gameRepository.findById(id).get();
-        return new GameDto(result);
+    public Optional<GameDto> findById(Long id) {
+        Optional<Game> gameOptional = gameRepository.findById(id);
+        return gameOptional.map(GameDto::new);
     }
 
     @Override
