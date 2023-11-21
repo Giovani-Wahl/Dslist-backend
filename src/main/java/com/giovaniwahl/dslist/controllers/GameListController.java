@@ -6,6 +6,12 @@ import com.giovaniwahl.dslist.domain.dtos.ReplacementDto;
 import com.giovaniwahl.dslist.domain.services.game.GameService;
 import com.giovaniwahl.dslist.domain.services.list.GameListService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
+import org.springframework.data.web.PageableDefault;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -22,8 +28,9 @@ public class GameListController {
     }
 
     @GetMapping
-    public List<GameListDto> findAll(){
-        return gameListService.findAll();
+    public ResponseEntity<Page<GameListDto>> findAll(@PageableDefault(page = 0, size = 5, sort = "id",
+            direction = Sort.Direction.ASC)Pageable pageable){
+        return ResponseEntity.status(HttpStatus.OK).body(gameListService.findAll(pageable));
     }
     @GetMapping("/{ListId}/games")
     public List<GameShortDto> findByList(@PathVariable Long ListId){

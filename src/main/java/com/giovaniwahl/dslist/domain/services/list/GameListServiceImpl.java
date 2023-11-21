@@ -6,6 +6,8 @@ import com.giovaniwahl.dslist.domain.repositories.GameListRepository;
 import com.giovaniwahl.dslist.domain.repositories.GameRepository;
 import com.giovaniwahl.dslist.projections.GameMinProjection;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -22,9 +24,9 @@ public class GameListServiceImpl implements GameListService {
     }
 
     @Override
-    public List<GameListDto> findAll() {
-        List<GameList> result = gameListRepository.findAll();
-        return result.stream().map(GameListDto::new).toList();
+    public Page<GameListDto> findAll(Pageable pageable) {
+        Page<GameList> result = gameListRepository.findAll(pageable);
+        return result.map(GameListDto::new);
     }
 
     @Override
